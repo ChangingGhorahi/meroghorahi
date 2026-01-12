@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Portal - Ghorahi</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <div class="top-left">
+                <span data-key="directory">Directory</span>
+            </div>
+            <div class="top-center">
+                <span class="emergency-label" data-key="emergency">Emergency:</span>
+                <span class="emergency-item"><i data-lucide="shield-alert" class="icon-sm"></i> <span data-key="police">Police</span>: 100</span>
+                <span class="emergency-item"><i data-lucide="ambulance" class="icon-sm"></i> <span data-key="ambulance">Ambulance</span>: 102</span>
+                <span class="emergency-item"><i data-lucide="flame" class="icon-sm"></i> <span data-key="fire">Fire</span>: 101</span>
+            </div>
+            <div class="lang-selector-group">
+                <span data-key="langPrefix">lan/भाषा:</span>
+                <button id="lang-toggle" class="lang-btn">नेपाली</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="branding-header">
+        <div class="container branding-inner">
+            <div class="logo-section">
+    <div class="logo-circle">
+        <img src="logo.png" alt="Mero Ghorahi Logo" class="site-logo">
+    </div>
+    <div class="org-name">
+        <h1 data-key="govName" style="font-size: 1.5rem; color: var(--color-text-dark); margin: 0;">Mero Ghorahi</h1>
+        <h2 data-key="portalName" style="font-size: 0.9rem; font-weight: 400; margin: 0; color: var(--color-text-gray);">Community Portal</h2>
+    </div>
+</div>
+        </div>
+    </header>
+
+    <nav class="icon-nav">
+        <div class="container icon-nav-inner">
+            <a href="index.html" class="nav-item active">
+                <i data-lucide="home"></i>
+                <span data-key="navHome">Home</span>
+                <span class="active-badge" aria-label="Active Page"></span>
+            </a>
+
+            <a href="wards.html" class="nav-item">
+                <i data-lucide="map-pin"></i>
+                <span data-key="navWards">Wards</span>
+            </a>
+
+            <a href="https://near.tl/sm/6w0eBvJD9" target="_blank" class="nav-item">
+                <i data-lucide="file-text"></i>
+                <span data-key="navComplaint">Complaint Box</span>
+            </a>
+            
+            <a href="#" class="nav-item menu-toggle-btn" data-target="full-menu-modal">
+                <i data-lucide="menu"></i>
+                <span data-key="navMenu">Menu</span>
+            </a>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <section class="section-padding">
+            <div class="container text-center">
+                <div class="mission-card">
+                    <h3 class="section-title text-blue" data-key="missionTitle">Our Community Mission</h3>
+                    <p class="mission-text" data-key="missionText">We are committed to fostering transparency, accountability, and sustainable development within Ghorahi. Through collaborative efforts, we strive to improve infrastructure and public services.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-white">
+            <div class="container text-center">
+                <h3 class="section-title" data-key="achievementsTitle">Our Achievements</h3>
+                <p class="section-subtitle" data-key="achievementsSub">Key milestones in our commitment to progress</p>
+
+                <!-- Achievements Carousel -->
+                <div class="achievements-carousel-container">
+                    <div class="achievements-carousel" id="achievements-carousel">
+                        <!-- Achievement 1 - Cleaning Campaign (Now First) -->
+                        <div class="achievement-card">
+                            <a href="https://www.facebook.com/share/p/1DbX1yr9o5/" target="_blank" class="achievement-link">
+                                <div class="achievement-image">
+                                    <img src="cleaning.jpg" alt="Community cleaning campaign">
+                                </div>
+                                <div class="achievement-content">
+                                    <h4>Community Cleaning Campaigns</h4>
+                                    <p>Organized and conducted multiple community cleaning campaigns to promote public hygiene and civic responsibility.</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Achievement 2 - Removed Ads -->
+                        <div class="achievement-card">
+                            <a href="https://www.facebook.com/story.php?story_fbid=908039661743089&id=100076111904570&rdid=U2oYcXl79jd2fJU4#" target="_blank" class="achievement-link">
+                                <div class="achievement-image">
+                                    <img src="boardComplain.jpg" alt="Removing boards and ads from light poles">
+                                </div>
+                                <div class="achievement-content">
+                                    <h4>Removed Illegal Ads from Light Poles</h4>
+                                    <p>Successfully complained and got results in removing unauthorized boards and advertisements from public light poles.</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Achievement 3 - 16 Dustbins -->
+                        <div class="achievement-card">
+                            <a href="https://nayayougbodh.com/news/2026/01/07/365080" target="_blank" class="achievement-link">
+                                <div class="achievement-image">
+                                    <img src="dustbin16.jpg" alt="16 dustbins installed">
+                                </div>
+                                <div class="achievement-content">
+                                    <h4>Installed 16 Public Dustbins</h4>
+                                    <p>Attached 16 dustbins along Tulsipur Chowk to Traffic Chowk to improve waste management and cleanliness.</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Achievement 4 - 5 Dustbins -->
+                        <div class="achievement-card">
+                            <a href="https://www.tiktok.com/@suzal996/video/7592871334682594567" target="_blank" class="achievement-link">
+                                <div class="achievement-image">
+                                    <img src="dustbin5.jpeg" alt="5 dustbins installed">
+                                </div>
+                                <div class="achievement-content">
+                                    <h4>5 More Dustbins for Cleaner Streets</h4>
+                                    <p>Added 5 additional dustbins from Tulsipur Chowk to Damodar Chowk, extending our cleanliness initiative.</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Duplicate cards for seamless looping (starting with Cleaning Campaign) -->
+                        <div class="achievement-card">
+                            <a href="https://www.facebook.com/share/p/1DbX1yr9o5/" target="_blank" class="achievement-link">
+                                <div class="achievement-image">
+                                    <img src="cleaning.jpg" alt="Community cleaning campaign">
+                                </div>
+                                <div class="achievement-content">
+                                    <h4>Community Cleaning Campaigns</h4>
+                                    <p>Organized and conducted multiple community cleaning campaigns to promote public hygiene and civic responsibility.</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <a href="https://www.facebook.com/story.php?story_fbid=908039661743089&id=100076111904570&rdid=U2oYcXl79jd2fJU4#" target="_blank" class="achievement-link">
+                                <div class="achievement-image">
+                                    <img src="boardComplain.jpg" alt="Removing boards and ads from light poles">
+                                </div>
+                                <div class="achievement-content">
+                                    <h4>Removed Illegal Ads from Light Poles</h4>
+                                    <p>Successfully complained and got results in removing unauthorized boards and advertisements from public light poles.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Navigation Dots -->
+                    <div class="carousel-dots">
+                        <button class="carousel-dot active" data-index="0"></button>
+                        <button class="carousel-dot" data-index="1"></button>
+                        <button class="carousel-dot" data-index="2"></button>
+                        <button class="carousel-dot" data-index="3"></button>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="carousel-nav carousel-prev" aria-label="Previous achievement">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav carousel-next" aria-label="Next achievement">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section-padding">
+            <div class="container text-center">
+                <h3 class="section-title">Public Notices</h3>
+                <p class="section-subtitle">No new notices at this time.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact-footer" class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-heading" data-key="contact">Contact Information</h3>
+                    <div class="contact-list">
+                        <div class="contact-item"><i data-lucide="map-pin" class="icon-blue"></i> <div><div data-key="address">Community Portal Office</div><div class="text-gray" data-key="addressLine">Ghorahi, Dang, Nepal</div></div></div>
+                            <div class="contact-item"><i data-lucide="phone-call" class="icon-blue"></i> <div><span data-key="phoneMobile">Mobile</span>: +977-9810145197</div></div>
+                            <div class="contact-item"><i data-lucide="mail" class="icon-blue"></i> <div><span data-key="email">Email</span>: ghorahimero@gmail.com</div></div>
+                    </div>
+                </div>
+                
+               
+                <div class="footer-col">
+                    <h3 class="footer-heading" data-key="hours">Office Hours</h3>
+                    <p><span data-key="hoursInfo">Sunday - Friday</span>: <span data-key="hoursTime">10:00 AM - 5:00 PM</span></p>
+                    <p class="closed-notice" data-key="closed">Closed on Saturdays and Public Holidays</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="text-center text-gray"><span data-key="lastUpdated">Last Updated</span>: <span id="date-display">December 8, 2025</span></div>
+                <div class="text-center text-gray" data-key="copyright">© 2025 Mero Ghorahi Community Portal. All rights reserved.</div>            </div>
+        </div>
+    </footer>
+
+    <div id="full-menu-modal" class="menu-modal-overlay">
+        <div class="menu-modal-content">
+            <button class="menu-modal-close" aria-label="Close Menu">&times;</button>
+            <h3 class="menu-modal-heading" data-key="navMenu">Menu</h3>
+
+            <a href="index.html" class="menu-modal-item" data-key="navHome">Home</a>
+            <a href="wards.html" class="menu-modal-item" data-key="navWards">Wards</a>
+            
+            <div class="menu-modal-item has-dropdown" id="videos-menu-toggle">
+                <span data-key="navVideos">Videos</span>
+                <i data-lucide="chevron-down" class="dropdown-icon"></i>
+            </div>
+
+            <div class="menu-dropdown-content" id="videos-dropdown">
+                <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosTutorial">Tutorial</a>
+                <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosYoutube">Youtube</a>
+                <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosTiktok">Tiktok</a>
+            </div>
+
+            <a href="#" class="menu-modal-item" data-key="navImages">Images</a>
+
+            <a href="localLifeline.html" class="menu-modal-item" data-key="navLifeline">Local Lifeline</a> <div class="menu-divider"></div>
+
+            <h4 class="menu-modal-subheading" data-key="menuRights">Your Rights</h4>
+            <a href="https://near.tl/sm/phzWVonGt" target="_blank" class="menu-modal-item" data-key="menuAskMayor">Ask Your Mayor</a>
+            <a href="https://near.tl/sm/6w0eBvJD9" target="_blank" class="menu-modal-item" data-key="navComplaint">Complain</a>
+            <a href="#" class="menu-modal-item" data-key="menuComplainProgress">Complain Progress</a>
+            <a href="https://near.tl/sm/Xp8hUnfXL" target="_blank" class="menu-modal-item" data-key="menuJoinUs">Join Us</a>
+            <div class="menu-divider"></div>
+
+            <h4 class="menu-modal-subheading" data-key="menuMoney">Your Money</h4>
+            <a href="#tax-calculator" class="menu-modal-item menu-calculator-btn" data-key="menuTaxCalc">Tax Calculator</a>
+            <a href="#" class="menu-modal-item" id="open-donate-modal" data-key="menuDonate">Donate Us</a>
+        </div>
+    </div>
+    
+    <div id="tax-calculator-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-key="taxCalcTitle">Indirect Tax Calculator</h2>
+                <button class="close-btn tax-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p data-key="taxCalcInfo">Enter your total Yearly expenditure (excluding rent, savings, and investment) to estimate the amount of indirect tax (like VAT) you pay in Nepal.</p>
+                
+                <label for="expenditure-input" data-key="expenditureLabel">Total Yearly Expenditure (NPR):</label>
+                <input type="number" id="expenditure-input" placeholder="e.g., 50000" min="0" required>
+                
+                <button id="calculate-tax-btn" class="calc-btn" data-key="calculateBtn">Calculate Tax</button>
+                
+                <div class="tax-result" style="margin-top: 15px;">
+                    <h4 data-key="taxPaidLabel">Estimated Indirect Tax Paid:</h4>
+                    <p id="tax-result-output" class="modal-info-text">NPR 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="donate-modal-overlay">
+    <div class="modal-content" id="donate-modal-content">
+        <div class="modal-header">
+            <h2 id="modal-donate-title">Scan to Donate</h2> 
+            <button class="close-btn" id="close-donate-modal">&times;</button>
+        </div>
+        <div class="modal-body text-center">
+            <p style="margin-bottom: 20px;" id="modal-donate-para">
+                Your generous contribution helps us improve local infrastructure and services for everyone in the municipality. Thank you for your support!
+            </p>
+            
+            <img src="eSewaQr.jpg" alt="eSewa QR Code for Donation" class="donation-qr-image">
+            
+            <div class="modal-note" id="modal-donate-note">
+                Note: Please verify the receiver's name **[Receiver Name]** before completing the transaction.
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
