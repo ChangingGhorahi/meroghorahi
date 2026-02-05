@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Tracker - Mero Ghorahi</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* --- Global Reset and Base Styles --- */
+        :root {
+            --color-primary: #3b82f6; /* Tailwind Blue-500 */
+            --color-secondary: #10b981; /* Tailwind Emerald-500 */
+            --color-accent: #8b5cf6; /* Tailwind Purple-500 */
+            --color-warning: #f59e0b; /* Tailwind Amber-500 */
+            --color-danger: #ef4444; /* Tailwind Red-500 */
+            --color-success: #10b981; /* Tailwind Emerald-500 */
+            --color-text-dark: #1f2937; /* Tailwind Gray-900 */
+            --color-text-gray: #4b5563; /* Tailwind Gray-600 */
+            --color-background-light: #f9fafb; /* Tailwind Gray-50 */
+            --color-white: #ffffff;
+            --color-border: #e5e7eb; /* Tailwind Gray-200 */
+            --font-family-base: 'Arial', sans-serif;
+            --box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            --box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-background-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* --- Header --- */
+        .tracker-header {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tracker-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="white" d="M50,5L85,35V85H15V35Z"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-logo {
+            width: 120px;
+            height: 120px;
+            background: var(--color-white);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            padding: 15px;
+            box-shadow: var(--box-shadow-lg);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Search Section --- */
+        .search-section {
+            background: var(--color-white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow-lg);
+            margin: -40px auto 60px;
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        .search-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 30px;
+            border: 2px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .search-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-md);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .phone-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            background: var(--color-white);
+        }
+
+        .phone-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .phone-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-primary);
+        }
+
+        .search-button {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .search-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-md);
+        }
+
+        .search-button i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--color-text-gray);
+            font-size: 0.9rem;
+            padding: 15px;
+            background: var(--color-background-light);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .security-note i {
+            color: var(--color-success);
+        }
+
+        /* --- Loading State --- */
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 5px solid var(--color-border);
+            border-top: 5px solid var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            color: var(--color-text-gray);
+        }
+
+        /* --- Results Section --- */
+        .results-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .results-title {
+            font-size: 2.2rem;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
+        }
+
+        .results-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-gray);
+        }
+
+        .complaint-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        /* --- Complaint Cards --- */
+        .complaints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .complaint-card {
+            background: var(--color-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid var(--color-border);
+        }
+
+        .complaint-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        /* Status Header */
+        .complaint-status-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-in-progress .complaint-status-header {
+            background: var(--gradient-warning);
+        }
+
+        .status-resolved .complaint-status-header {
+            background: var(--gradient-success);
+        }
+
+        .status-pending .complaint-status-header {
+            background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+        }
+
+        .status-registered .complaint-status-header {
+            background: var(--gradient-primary);
+        }
+
+        .status-rejected .complaint-status-header {
+            background: var(--gradient-danger);
+        }
+
+        .status-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .status-icon i {
+            width: 24px;
+            height: 24px;
+            color: var(--color-white);
+        }
+
+        .status-info h3 {
+            color: var(--color-white);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .status-badge {
+            background: rgba(255, 255, 255, 0.3);
+            color: var(--color-white);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        /* Complaint Content - UPDATED FOR SIMPLER LAYOUT */
+        .complaint-content {
+            padding: 25px;
+        }
+
+        .complaint-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--color-border);
+        }
+
+        .complaint-detail:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .complaint-detail.issue-detail {
+            background: var(--color-background-light);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+            border-bottom: none;
+        }
+
+        .detail-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--color-primary);
+            margin-right: 15px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--color-text-gray);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 1.05rem;
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+
+        .detail-value.category {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .priority-high {
+            color: var(--color-danger);
+            font-weight: 600;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-left: 8px;
+        }
+
+        .priority-medium {
+            color: var(--color-warning);
+            font-weight: 600;
+            background: rgba(245, 158, 11, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-left: 8px;
+        }
+
+        .priority-low {
+            color: var(--color-success);
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-left: 8px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--color-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 3px solid var(--color-white);
+            box-shadow: 0 0 0 2px var(--color-primary);
+        }
+
+        .timeline-content {
+            padding: 10px;
+            background: var(--color-background-light);
+            border-radius: 8px;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--color-text-gray);
+            margin-bottom: 5px;
+        }
+
+        .timeline-text {
+            font-size: 0.95rem;
+            color: var(--color-text-dark);
+        }
+
+        /* --- No Results --- */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--color-white);
+            border-radius: 20px;
+            box-shadow: var(--box-shadow-md);
+            display: none;
+        }
+
+        .no-results-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--color-background-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+
+        .no-results-icon i {
+            width: 50px;
+            height: 50px;
+            color: var(--color-text-gray);
+        }
+
+        .no-results h3 {
+            font-size: 1.8rem;
+            color: var(--color-text-dark);
+            margin-bottom: 15px;
+        }
+
+        .no-results p {
+            color: var(--color-text-gray);
+            margin-bottom: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-md);
+        }
+
+        /* --- Error State --- */
+        .error-container {
+            text-align: center;
+            padding: 40px;
+            background: #fee2e2;
+            border-radius: 12px;
+            color: var(--color-red);
+            display: none;
+        }
+
+        /* --- Footer --- */
+        .tracker-footer {
+            background: var(--color-text-dark);
+            color: var(--color-white);
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--color-secondary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+       /* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 2.2rem;
+    }
+
+    .search-section {
+        padding: 25px;
+        margin: -30px auto 40px;
+        width: 100%;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .complaints-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        width: 100%;
+    }
+
+    .complaint-card {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .complaint-status-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .status-icon {
+        margin-bottom: 10px;
+    }
+
+    /* IMPORTANT FIX */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    main.container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .results-section {
+        width: 100%;
+    }
+
+    .results-header {
+        text-align: center;
+        width: 100%;
+    }
+
+    .tracker-header {
+        text-align: center;
+    }
+
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-title {
+        font-size: 1.8rem;
+    }
+
+    .header-subtitle {
+        font-size: 1rem;
+    }
+
+    .search-card {
+        padding: 20px;
+    }
+
+    .phone-input {
+        padding: 15px 15px 15px 45px;
+    }
+
+    .complaint-content {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="tracker-header">
+        <div class="container header-content">
+            <div class="header-logo">
+                <img src="logo.png" alt="Mero Ghorahi Logo">
+            </div>
+            <h1 class="header-title">Complaint Tracker</h1>
+            <p class="header-subtitle">Track the status of your complaints with real-time updates from Ghorahi Municipality. Your voice matters.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search Section -->
+        <section class="search-section">
+            <h2 class="search-title">Check Your Complaint Status</h2>
+            <div class="search-card">
+                <form id="complaintForm" class="search-form">
+                    <div class="phone-input-wrapper">
+                        <i data-lucide="phone" class="phone-icon"></i>
+                        <input 
+                            type="tel" 
+                            class="phone-input" 
+                            id="phoneNumber"
+                            placeholder="Enter your 10-digit phone number"
+                            maxlength="10"
+                            pattern="[0-9]{10}"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="search-button">
+                        <i data-lucide="search"></i>
+                        Check Progress
+                    </button>
+                </form>
+                <div class="security-note">
+                    <i data-lucide="shield-check"></i>
+                    <span>Your information is secure. We only use your phone number to retrieve your complaint status.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Searching for your complaints...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorContainer" class="error-container">
+            <i data-lucide="alert-circle" width="48" height="48"></i>
+            <h3 id="errorTitle">Unable to fetch complaints</h3>
+            <p id="errorMessage">Please try again later or contact support if the problem persists</p>
+        </div>
+
+        <!-- No Results State -->
+        <div id="noResults" class="no-results">
+            <div class="no-results-icon">
+                <i data-lucide="file-search"></i>
+            </div>
+            <h3>No Complaints Found</h3>
+            <p>We couldn't find any complaints associated with this phone number. Please verify the number or submit a new complaint.</p>
+            <a href="https://near.tl/sm/6w0eBvJD9" target="_blank" class="action-button">
+                <i data-lucide="file-plus"></i>
+                Submit New Complaint
+            </a>
+        </div>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="results-section">
+            <div class="results-header">
+                <h2 class="results-title">Your Complaint Status</h2>
+                <p class="results-subtitle">Track the progress of your submitted complaints</p>
+                <div class="complaint-count">
+                    <i data-lucide="file-text"></i>
+                    <span id="complaintCount">0 complaints found</span>
+                </div>
+            </div>
+
+            <!-- Complaints Grid -->
+            <div class="complaints-grid" id="complaintsGrid">
+                <!-- Complaint cards will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tracker-footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Mero Ghorahi</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="wards.html">Wards</a></li>
+                        <li><a href="progress.html">Complaint Progress</a></li>
+                        <li><a href="https://near.tl/sm/6w0eBvJD9" target="_blank">Submit Complaint</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-links">
+                        <li><i data-lucide="phone" style="width: 16px; height: 16px; margin-right: 8px;"></i> +977-9810145197</li>
+                        <li><i data-lucide="mail" style="width: 16px; height: 16px; margin-right: 8px;"></i> ghorahimero@gmail.com</li>
+                        <li><i data-lucide="map-pin" style="width: 16px; height: 16px; margin-right: 8px;"></i> Ghorahi, Dang, Nepal</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i data-lucide="alert-circle" style="width: 16px; height: 16px; margin-right: 8px;"></i> Emergency Numbers</a></li>
+                        <li><a href="#"><i data-lucide="calendar" style="width: 16px; height: 16px; margin-right: 8px;"></i> Office Hours</a></li>
+                        <li><a href="#"><i data-lucide="help-circle" style="width: 16px; height: 16px; margin-right: 8px;"></i> FAQ</a></li>
+                        <li><a href="#"><i data-lucide="shield" style="width: 16px; height: 16px; margin-right: 8px;"></i> Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Mero Ghorahi Community Portal. All rights reserved.</p>
+                <p style="margin-top: 5px; font-size: 0.8rem;">Last Updated: December 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // API Configuration (FROM WORKING CODE)
+        const API_URL = 'https://script.google.com/macros/s/AKfycbyrDRHwim9aktW9pw8STiDXsI3HAD2fl9EdcbmgsVIrdF_SsRwcW7ClywVOeyI2ES4fWg/exec';
+
+        // DOM Elements
+        const complaintForm = document.getElementById('complaintForm');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const loadingState = document.getElementById('loadingState');
+        const errorContainer = document.getElementById('errorContainer');
+        const errorTitle = document.getElementById('errorTitle');
+        const errorMessage = document.getElementById('errorMessage');
+        const noResults = document.getElementById('noResults');
+        const resultsSection = document.getElementById('resultsSection');
+        const complaintsGrid = document.getElementById('complaintsGrid');
+        const complaintCount = document.getElementById('complaintCount');
+
+        // Status icons mapping (FROM WORKING CODE)
+        const statusIcons = {
+            'Pending': 'clock',
+            'In Progress': 'refresh-cw',
+            'Completed': 'check-circle',
+            'Registered': 'file-check',
+            'Not Accepted': 'x-circle'
+        };
+
+        // Format phone number for display (FROM WORKING CODE)
+        function formatPhoneNumber(phone) {
+            if (!phone) return '';
+            const cleaned = phone.toString().replace(/\D/g, '');
+            if (cleaned.length === 10) {
+                return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+            }
+            return cleaned;
+        }
+
+        // Show loading state (ADAPTED FROM WORKING CODE)
+        function showLoading() {
+            loadingState.style.display = 'block';
+            errorContainer.style.display = 'none';
+            noResults.style.display = 'none';
+            resultsSection.style.display = 'none';
+        }
+
+        // Show error state (FROM WORKING CODE)
+        function showError(title, message) {
+            loadingState.style.display = 'none';
+            errorContainer.style.display = 'block';
+            errorTitle.textContent = title;
+            errorMessage.textContent = message;
+            noResults.style.display = 'none';
+            resultsSection.style.display = 'none';
+        }
+
+        // Show no results state (FROM WORKING CODE)
+        function showNoResults() {
+            loadingState.style.display = 'none';
+            errorContainer.style.display = 'none';
+            noResults.style.display = 'block';
+            resultsSection.style.display = 'none';
+        }
+
+        // Show results (FROM WORKING CODE WITH UI ADAPTATION)
+        function showResults(complaints, phone) {
+            loadingState.style.display = 'none';
+            errorContainer.style.display = 'none';
+            noResults.style.display = 'none';
+            resultsSection.style.display = 'block';
+            
+            complaintCount.textContent = `${complaints.length} complaint${complaints.length !== 1 ? 's' : ''} found for ${formatPhoneNumber(phone)}`;
+            
+            renderComplaints(complaints);
+        }
+
+        // Get priority class for styling
+        function getPriorityClass(priority) {
+            switch(priority) {
+                case 'High': return 'priority-high';
+                case 'Medium': return 'priority-medium';
+                case 'Low': return 'priority-low';
+                default: return 'priority-medium';
+            }
+        }
+
+        // Create complaint card HTML - UPDATED AS REQUESTED
+        function createComplaintCard(complaint) {
+            // Map API status to UI status
+            let statusClass = 'status-pending';
+            let statusDisplay = complaint.status;
+            
+            if (complaint.status === 'Completed') {
+                statusClass = 'status-resolved';
+                statusDisplay = 'Resolved';
+            } else if (complaint.status === 'In Progress') {
+                statusClass = 'status-in-progress';
+                statusDisplay = 'In Progress';
+            } else if (complaint.status === 'Registered') {
+                statusClass = 'status-registered';
+                statusDisplay = 'Registered';
+            } else if (complaint.status === 'Not Accepted') {
+                statusClass = 'status-rejected';
+                statusDisplay = 'Rejected';
+            }
+            
+            const statusIcon = statusIcons[complaint.status] || 'clock';
+            const priorityClass = getPriorityClass(complaint.seriousness);
+            
+            return `
+                <div class="complaint-card ${statusClass}">
+                    <div class="complaint-status-header">
+                        <div class="status-icon">
+                            <i data-lucide="${statusIcon}"></i>
+                        </div>
+                        <div class="status-info">
+                            <!-- CATEGORY AS HEADER -->
+                            <h3>${complaint.type}</h3>
+                            <div class="status-badge">${statusDisplay} • <span class="${priorityClass}">${complaint.seriousness} Priority</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="complaint-content">
+                        <!-- 1. Category & Priority (Already shown in header) -->
+                        <!-- Complaint ID removed as requested -->
+                        
+                        <!-- 2. Submitted By -->
+                        <div class="complaint-detail">
+                            <i data-lucide="user" class="detail-icon"></i>
+                            <div class="detail-content">
+                                <div class="detail-label">Submitted By</div>
+                                <div class="detail-value">${complaint.name}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- 3. Location with Tole -->
+                        <div class="complaint-detail">
+                            <i data-lucide="map-pin" class="detail-icon"></i>
+                            <div class="detail-content">
+                                <div class="detail-label">Location</div>
+                                <div class="detail-value">${complaint.location}, ${complaint.toleName}, Ward ${complaint.ward}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- 4. Issue Description -->
+                        <div class="complaint-detail issue-detail">
+                            <i data-lucide="alert-circle" class="detail-icon"></i>
+                            <div class="detail-content">
+                                <div class="detail-label">Issue Description</div>
+                                <div class="detail-value">${complaint.issue}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render complaints to the grid (FROM WORKING CODE)
+        function renderComplaints(complaints) {
+            if (!complaints || complaints.length === 0) {
+                showNoResults();
+                return;
+            }
+
+            complaintsGrid.innerHTML = '';
+            complaints.forEach(complaint => {
+                const cardHTML = createComplaintCard(complaint);
+                complaintsGrid.innerHTML += cardHTML;
+            });
+
+            // Reinitialize icons in the new cards
+            lucide.createIcons();
+        }
+
+        // Fetch complaints from API (FROM WORKING CODE)
+        async function fetchComplaints(phone) {
+            try {
+                showLoading();
+                const response = await fetch(`${API_URL}?phone=${phone}`);
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                
+                if (data.success && data.complaints && data.complaints.length > 0) {
+                    showResults(data.complaints, phone);
+                } else {
+                    showNoResults();
+                }
+            } catch (error) {
+                console.error('Error fetching complaints:', error);
+                showError('Connection Error', 'Unable to connect to the server. Please check your internet connection and try again.');
+            }
+        }
+
+        // Event Listeners (FROM WORKING CODE)
+        complaintForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const phone = phoneNumberInput.value.trim();
+            
+            if (!phone || phone.length !== 10) {
+                alert('Please enter a valid 10-digit phone number');
+                return;
+            }
+            
+            await fetchComplaints(phone);
+        });
+
+        // Input validation for phone number (FROM WORKING CODE)
+        phoneNumberInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+        });
+
+        // Focus on phone input when page loads
+        window.addEventListener('load', () => {
+            phoneNumberInput.focus();
+        });
+    </script>
+</body>
+</html>
