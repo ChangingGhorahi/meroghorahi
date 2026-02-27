@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Wards Directory - Ghorahi</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
@@ -35,7 +35,7 @@
     <div class="container branding-inner">
         <div class="logo-section">
             <div class="logo-circle">
-                <img src="logo.png" alt="Mero Ghorahi Logo" class="site-logo">
+                <img src="Photos/logo.png" alt="Mero Ghorahi Logo" class="site-logo">
             </div>
             <div class="org-name">
                 <h1 data-key="govName" style="font-size: 1.5rem; color: var(--color-text-dark); margin: 0;">Mero Ghorahi</h1>
@@ -101,51 +101,22 @@
                 <p><span data-key="hoursInfo">Sunday - Friday</span>: <span data-key="hoursTime">10:00 AM - 5:00 PM</span></p>
                 <p class="closed-notice" data-key="closed">Closed on Saturdays and Public Holidays</p>
             </div>
+
+            <!-- Added About Us link in footer -->
+            <div class="footer-col">
+                <h3 class="footer-heading">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html" data-key="navAbout">About Us</a></li>
+                </ul>
+            </div>
         </div>
 
         <div class="footer-bottom">
+            <div class="text-center text-gray"><span data-key="lastUpdated">Last Updated</span>: <span id="date-display">December 8, 2025</span></div>
             <div class="text-center text-gray" data-key="copyright">© 2025 Mero Ghorahi Community Portal. All rights reserved.</div>
         </div>
     </div>
 </footer>
-
-<!-- ================= FULL MENU MODAL ================= -->
-<div id="full-menu-modal" class="menu-modal-overlay">
-    <div class="menu-modal-content">
-        <button class="menu-modal-close" aria-label="Close Menu">&times;</button>
-        <h3 class="menu-modal-heading" data-key="navMenu">Menu</h3>
-
-        <a href="index.html" class="menu-modal-item" data-key="navHome">Home</a>
-        <a href="wards.html" class="menu-modal-item" data-key="navWards">Wards</a>
-        
-        <div class="menu-modal-item has-dropdown" id="videos-menu-toggle">
-            <span data-key="navVideos">Videos</span>
-            <i data-lucide="chevron-down" class="dropdown-icon"></i>
-        </div>
-
-        <div class="menu-dropdown-content" id="videos-dropdown">
-            <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosTutorial">Tutorial</a>
-            <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosYoutube">Youtube</a>
-            <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosTiktok">Tiktok</a>
-        </div>
-
-        <a href="#" class="menu-modal-item" data-key="navImages">Images</a>
-
-        <a href="localLifeline.html" class="menu-modal-item" data-key="navLifeline">Local Lifeline</a> 
-        <div class="menu-divider"></div>
-
-        <h4 class="menu-modal-subheading" data-key="menuRights">Your Rights</h4>
-        <a href="https://near.tl/sm/phzWVonGt" target="_blank" class="menu-modal-item" data-key="menuAskMayor">Ask Your Mayor</a>
-        <a href="https://near.tl/sm/6w0eBvJD9" target="_blank" class="menu-modal-item" data-key="navComplaint">Complain</a>
-        <a href="#" class="menu-modal-item" data-key="menuComplainProgress">Complain Progress</a>
-        <a href="https://near.tl/sm/Xp8hUnfXL" target="_blank" class="menu-modal-item" data-key="menuJoinUs">Join Us</a>
-        <div class="menu-divider"></div>
-
-        <h4 class="menu-modal-subheading" data-key="menuMoney">Your Money</h4>
-        <a href="#tax-calculator" class="menu-modal-item menu-calculator-btn" data-key="menuTaxCalc">Tax Calculator</a>
-        <a href="#" class="menu-modal-item" id="open-donate-modal" data-key="menuDonate">Donate Us</a>
-    </div>
-</div>
 
 <!-- ================= WARD MODAL ================= -->
 <div id="ward-modal" class="modal-overlay">
@@ -173,6 +144,9 @@
         </div>
     </div>
 </div>
+
+<!-- Menu modal placeholder - will be populated by JavaScript -->
+<div id="full-menu-modal" class="menu-modal-overlay"></div>
 
 <!-- ================= TAX CALCULATOR MODAL ================= -->
 <div id="tax-calculator-modal" class="modal-overlay">
@@ -209,7 +183,7 @@
                 Your generous contribution helps us improve local infrastructure and services for everyone in the municipality. Thank you for your support!
             </p>
             
-            <img src="eSewaQr.jpg" alt="eSewa QR Code for Donation" class="donation-qr-image">
+            <img src="Photos/eSewaQr.jpg" alt="eSewa QR Code for Donation" class="donation-qr-image">
             
             <div class="modal-note" id="modal-donate-note">
                 Note: Please verify the receiver's name **[Receiver Name]** before completing the transaction.
