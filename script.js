@@ -220,39 +220,48 @@ function generateUniversalMenu() {
     const menuHTML = `
         <div class="menu-modal-content">
             <button class="menu-modal-close" aria-label="Close Menu">&times;</button>
-            <h3 class="menu-modal-heading" data-key="navMenu">${t.navMenu}</h3>
-
-            <a href="index.html" class="menu-modal-item" data-key="navHome">${t.navHome}</a>
-            <a href="wards.html" class="menu-modal-item" data-key="navWards">${t.navWards}</a>
             
-            <div class="menu-modal-item has-dropdown" id="videos-menu-toggle">
-                <span data-key="navVideos">${t.navVideos}</span>
-                <i data-lucide="chevron-down" class="dropdown-icon"></i>
+            <div class="menu-modal-header">
+                <h3 class="menu-modal-heading" data-key="navMenu">${t.navMenu}</h3>
             </div>
+            
+            <div class="menu-modal-body">
+                <div class="menu-modal-section">
+                    <div class="menu-modal-item has-dropdown" id="videos-menu-toggle">
+                        <span data-key="navVideos">${t.navVideos}</span>
+                        <i data-lucide="chevron-down" class="dropdown-icon"></i>
+                    </div>
 
-            <div class="menu-dropdown-content" id="videos-dropdown">
-                <a href="https://www.tiktok.com/@mero.ghorahi/video/7601459505007807752" target="_blank" class="menu-dropdown-item" data-key="navVideosTutorial">${t.navVideosTutorial || 'Tutorial'}</a>
-                <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosYoutube">${t.navVideosYoutube || 'Youtube'}</a>
-                <a href="https://www.tiktok.com/@mero.ghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosTiktok">${t.navVideosTiktok || 'Tiktok'}</a>
+                    <div class="menu-dropdown-content" id="videos-dropdown">
+                        <a href="https://www.tiktok.com/@mero.ghorahi/video/7601459505007807752" target="_blank" class="menu-dropdown-item" data-key="navVideosTutorial">${t.navVideosTutorial || 'Tutorial'}</a>
+                        <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosYoutube">${t.navVideosYoutube || 'Youtube'}</a>
+                        <a href="https://www.tiktok.com/@mero.ghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosTiktok">${t.navVideosTiktok || 'Tiktok'}</a>
+                    </div>
+
+                    <a href="gallery.html" class="menu-modal-item" data-key="navImages">${t.navImages}</a>
+                    <a href="localLifeline.html" class="menu-modal-item" data-key="navLifeline">${t.navLifeline}</a>
+                    <a href="about.html" class="menu-modal-item" data-key="navAbout">${t.navAbout}</a>
+                </div>
+                
+                <div class="menu-divider"></div>
+
+                <div class="menu-modal-section">
+                    <h4 class="menu-modal-subheading" data-key="menuRights">${t.menuRights}</h4>
+                    <a href="progress.html" class="menu-modal-item" data-key="menuComplainProgress">${t.menuComplainProgress}</a>
+                    <a href="https://near.tl/sm/Xp8hUnfXL" target="_blank" class="menu-modal-item" data-key="menuJoinUs">${t.menuJoinUs}</a>
+                </div>
+                
+                <div class="menu-divider"></div>
+
+                <div class="menu-modal-section">
+                    <h4 class="menu-modal-subheading" data-key="menuMoney">${t.menuMoney}</h4>
+                    <a href="#tax-calculator" class="menu-modal-item menu-calculator-btn" data-key="menuTaxCalc">${t.menuTaxCalc}</a>
+                    <a href="#" class="menu-modal-item" id="open-donate-modal" data-key="menuDonate">${t.menuDonate}</a>
+                </div>
             </div>
-
-            <a href="gallery.html" class="menu-modal-item" data-key="navImages">${t.navImages}</a>
-            <a href="localLifeline.html" class="menu-modal-item" data-key="navLifeline">${t.navLifeline}</a>
-            <a href="about.html" class="menu-modal-item" data-key="navAbout">${t.navAbout}</a>
             
-            <div class="menu-divider"></div>
-
-            <h4 class="menu-modal-subheading" data-key="menuRights">${t.menuRights}</h4>
-            <a href="https://near.tl/sm/phzWVonGt" target="_blank" class="menu-modal-item" data-key="menuAskMayor">${t.menuAskMayor}</a>
-            <a href="https://near.tl/sm/6w0eBvJD9" target="_blank" class="menu-modal-item" data-key="navComplaint">${t.navComplaint}</a>
-            <a href="progress.html" class="menu-modal-item" data-key="menuComplainProgress">${t.menuComplainProgress}</a>
-            <a href="https://near.tl/sm/Xp8hUnfXL" target="_blank" class="menu-modal-item" data-key="menuJoinUs">${t.menuJoinUs}</a>
-            
-            <div class="menu-divider"></div>
-
-            <h4 class="menu-modal-subheading" data-key="menuMoney">${t.menuMoney}</h4>
-            <a href="#tax-calculator" class="menu-modal-item menu-calculator-btn" data-key="menuTaxCalc">${t.menuTaxCalc}</a>
-            <a href="#" class="menu-modal-item" id="open-donate-modal" data-key="menuDonate">${t.menuDonate}</a>
+            <div class="menu-modal-footer">
+            </div>
         </div>
     `;
     
@@ -263,6 +272,8 @@ function generateUniversalMenu() {
         setupMenuEventListeners();
     }, 0);
 }
+
+
 
 // ============================================
 // TAX CALCULATOR FUNCTIONS
