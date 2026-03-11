@@ -522,10 +522,39 @@ function initializeLightbox() {
     const photoCards = document.querySelectorAll('.photo-card');
     const lightbox = document.getElementById('lightbox-modal');
     
-    if (!lightbox) createLightbox();
+    // If no lightbox or no photos, exit
+    if (!lightbox || photoCards.length === 0) return;
     
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const prevBtn = lightbox.querySelector('.lightbox-prev');
+    const nextBtn = lightbox.querySelector('.lightbox-next');
+
+    // Remove existing listeners to avoid duplicates
+    const newCloseBtn = closeBtn.cloneNode(true);
+    const newPrevBtn = prevBtn.cloneNode(true);
+    const newNextBtn = nextBtn.cloneNode(true);
+    
+    closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+    prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+    nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+
+    // Attach button listeners
+    newCloseBtn.addEventListener('click', closeLightbox);
+    newPrevBtn.addEventListener('click', () => navigateLightbox('prev'));
+    newNextBtn.addEventListener('click', () => navigateLightbox('next'));
+
+    // Click on overlay closes lightbox
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Add click listeners to each photo card
     photoCards.forEach((card, index) => {
-        card.addEventListener('click', () => {
+        // Remove old listener if any
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
+        
+        newCard.addEventListener('click', () => {
             const allImages = Array.from(document.querySelectorAll('.photo-card')).map(c => ({
                 src: c.getAttribute('data-src'),
                 title: c.getAttribute('data-title')
@@ -533,50 +562,12 @@ function initializeLightbox() {
             openLightbox(index, allImages);
         });
     });
+
+    // Create icons for the buttons
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
-function createLightbox() {
-    const lightboxHTML = `
-        <div id="lightbox-modal" class="lightbox-modal">
-            <div class="lightbox-content">
-                <button class="lightbox-close">&times;</button>
-                <img src="" alt="" class="lightbox-image">
-                <div class="lightbox-caption"></div>
-                <button class="lightbox-nav lightbox-prev">
-                    <i data-lucide="chevron-left"></i>
-                </button>
-                <button class="lightbox-nav lightbox-next">
-                    <i data-lucide="chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    `;
-    
-    document.body.insertAdjacentHTML('beforeend', lightboxHTML);
-    
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-    
-    const lightbox = document.getElementById('lightbox-modal');
-    const closeBtn = lightbox.querySelector('.lightbox-close');
-    const prevBtn = lightbox.querySelector('.lightbox-prev');
-    const nextBtn = lightbox.querySelector('.lightbox-next');
-    
-    closeBtn.addEventListener('click', closeLightbox);
-    prevBtn.addEventListener('click', () => navigateLightbox('prev'));
-    nextBtn.addEventListener('click', () => navigateLightbox('next'));
-    
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
-    
-    document.addEventListener('keydown', (e) => {
-        if (lightbox.style.display === 'flex') {
-            if (e.key === 'Escape') closeLightbox();
-            else if (e.key === 'ArrowLeft') navigateLightbox('prev');
-            else if (e.key === 'ArrowRight') navigateLightbox('next');
-        }
-    });
-}
+
 
 function openLightbox(index, images) {
     const lightbox = document.getElementById('lightbox-modal');
@@ -1228,6 +1219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    
     // Complaint form listener
     if (complaintForm) {
         complaintForm.addEventListener('submit', async (e) => {
@@ -1257,3 +1249,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') lucide.createIcons();
 });
 
+document.addEventListener('keydown', (e) => {
+    const lightbox = document.getElementById('lightbox-modal');
+    if (lightbox && lightbox.style.display === 'flex') {
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === 'ArrowLeft') navigateLightbox('prev');
+        else if (e.key === 'ArrowRight') navigateLightbox('next');
+    }
+});
