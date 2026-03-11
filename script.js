@@ -438,7 +438,7 @@ function initializeGallery() {
     
     const images = [];
     let loadedCount = 0;
-    const totalImages = 7;
+    const totalImages = 100;
     
     for (let i = 1; i <= totalImages; i++) {
         const img = new Image();
@@ -1256,3 +1256,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Recreate icons
     if (typeof lucide !== 'undefined') lucide.createIcons();
 });
+
