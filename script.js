@@ -233,7 +233,7 @@ function generateUniversalMenu() {
                     </div>
 
                     <div class="menu-dropdown-content" id="videos-dropdown">
-                        <a href="https://www.tiktok.com/@mero.ghorahi/video/7601459505007807752" target="_blank" class="menu-dropdown-item" data-key="navVideosTutorial">${t.navVideosTutorial || 'Tutorial'}</a>
+                        <a href="https://www.tiktok.com/@mero.ghorahi/video/7612230791296290066?lang=en" target="_blank" class="menu-dropdown-item" data-key="navVideosTutorial">${t.navVideosTutorial || 'Tutorial'}</a>
                         <a href="https://www.youtube.com/@meroghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosYoutube">${t.navVideosYoutube || 'Youtube'}</a>
                         <a href="https://www.tiktok.com/@mero.ghorahi" target="_blank" class="menu-dropdown-item" data-key="navVideosTiktok">${t.navVideosTiktok || 'Tiktok'}</a>
                     </div>
@@ -1257,3 +1257,4 @@ document.addEventListener('keydown', (e) => {
         else if (e.key === 'ArrowRight') navigateLightbox('next');
     }
 });
+
