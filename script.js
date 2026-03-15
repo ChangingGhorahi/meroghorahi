@@ -44,7 +44,7 @@ const translations = {
         taxPaidLabel: 'Estimated Indirect Tax Paid:',
         // Donate Modal Translations
         modalDonateTitle: 'Scan to Donate',
-        modalDonatePara: 'Your generous contribution helps us improve local infrastructure and services for everyone in the municipality. Thank you for your support!',
+        modalDonatePara: 'Thank you for your support!',
         modalDonateNote: 'Note: Please verify the receiver\'s name **[Receiver Name]** before completing the transaction.',
         
         // Local Lifeline Translations
